@@ -49,10 +49,14 @@ interface User {
 
 ### 1.4 文件名
 
-- **小写字母和下划线**：文件名使用小写字母和下划线分隔单词（snake_case）。
+- **驼峰命名法**: 文件名统一使用驼峰命名法。对于 React 组件，使用大驼峰法（PascalCase），并与组件名保持一致。对于非组件的 ts 文件（如工具函数、类型定义等），使用小驼峰法（camelCase）。
 
 ```typescript
-// user_profile.ts
+// Good: React 组件
+// src/components/UserProfile.tsx
+
+// Good: 工具类文件
+// src/utils/stringUtils.ts
 ```
 
 ---

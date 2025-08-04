@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# 读取完整的 commit message 文件路径
+COMMIT_MSG_FILE=$1
+# 读取第一行作为 subject
+SUBJECT=$(head -n 1 "$COMMIT_MSG_FILE")
+
+# 允许 Merge commits 和 Revert commits 通过
+if echo "$SUBJECT" | grep -qE "^Merge" || echo "$SUBJECT" | grep -qE "^Revert"; then
+    exit 0
+fi
+
+# 验证 subject 是否符合 Conventional Commits 规范
+REGEX="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore)(\(.+\))?:\s.+$"
+
+if ! echo "$SUBJECT" | grep -qE "$REGEX"; then
+    echo "ERROR: Your commit message subject does not follow the Conventional Commits format." >&2
+    echo "       Example: feat(scope): description" >&2
+    echo "       Your subject: \"$SUBJECT\"" >&2
+    exit 1
+fi
+
+# 验证 subject 长度 (推荐不超过 72 个字符)
+SUBJECT_LENGTH=$(echo "$SUBJECT" | wc -c | awk '{print $1}')
+if [ "$SUBJECT_LENGTH" -gt 72 ]; then
+    echo "WARNING: Your commit message subject is longer than 72 characters." >&2
+fi
+
+exit 0

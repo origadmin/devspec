@@ -1,5 +1,7 @@
 # 编码规范
 
+> **注意**: 本文档为通用编码规范。如果您的项目有专属的、更详细的规范（如 `go-coding.md`），请优先遵循该专属规范。本文档主要作为没有专属规范的项目的指导，或作为专属规范的补充。
+
 ## 目的
 
 定义通用的编码规范，确保代码风格一致，提高代码的可读性和可维护性。这些规范适用于多种编程语言和项目类型。
@@ -15,11 +17,13 @@
 - **文件名**：使用小写字母和下划线分隔单词（snake_case）。
 
 ```python
-# 正确的命名方式（Python 示例）
+# Python 示例
 user_name = "Alice"
 MAX_RETRIES = 5
-def getUser():
+
+def get_user():
     pass
+
 class User:
     pass
 ```
@@ -32,13 +36,13 @@ class User:
 - **TODO 注释**：使用 `TODO` 标记未来需要处理的任务或潜在问题。格式为：`TODO(username): description`。
 
 ```python
-# 模块注释示例
+# Python 模块注释示例
 """
 utils.py: 该模块包含了项目共用的一些工具函数。
 """
 
-# 函数注释示例
-def new_user(name: str) -> 'User':
+# Python 函数注释示例
+def create_new_user(name: str) -> 'User':
     """
     创建一个新的用户对象。
     
@@ -46,7 +50,7 @@ def new_user(name: str) -> 'User':
         name: 用户名
     
     返回值：
-        User 对象指针
+        User 对象
     """
     return User(name=name)
 ```
@@ -75,21 +79,15 @@ if a>0:  # 不正确
 - **不要忽略错误**：所有可能返回错误的调用都必须处理，不能简单地忽略。
 - **尽早返回**：一旦发生错误，立即返回，避免嵌套过深。
 - **自定义错误类型**：对于特定业务逻辑的错误，建议定义自定义错误类型。
+- **错误处理机制**: 不同语言有不同的错误处理机制，例如 Python 的 `try...except`，Go 的 `error` 返回值，Java 的 `try-catch`。请遵循对应语言的最佳实践。
 
 ```python
-# 正确的错误处理
+# Python 错误处理示例
 try:
     result = process_data()
-except Exception as e:
-    logging.error(f"Failed to process data: {e}")
+except ValueError as e:
+    logging.error(f"Invalid data: {e}")
     return None
-
-# 错误的错误处理
-try:
-    result = process_data()
-except Exception:
-    # 错误处理
-    pass
 ```
 
 ### 5. **依赖管理**

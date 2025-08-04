@@ -26,17 +26,11 @@
     ├─assets
     │  ├─icons
     │  └─static
-    ├─components
-    │  ├─custom
-    │  ├─DataTable
-    │  ├─Field
-    │  ├─FileUpload
-    │  ├─KBar
-    │  ├─Loading
-    │  ├─NavUser
-    │  ├─Sidebar
-    │  ├─Theme
-    │  └─ui
+    │   ├── components/           # 可复用的 UI 组件
+│   │   ├── ui/               # 基础 UI 组件（如 Shadcn UI 组件、或项目自定义的基础 UI 元素）
+│   │   ├── common/           # 通用业务组件（基于 ui 组件封装，或项目内通用的复合组件）
+│   │   ├── layout/           # 布局组件（如 Header, Footer, Sidebar）
+│   │   └── domain/           # 领域特定组件（与特定业务功能强关联）
     ├─context
     ├─hooks
     ├─lib
@@ -183,6 +177,42 @@
 
 - **用途**：存放项目的源代码。
 - **内容**：见下文详细说明。
+
+### 文件系统路由 (File System Routing)
+
+对于使用支持文件系统路由的框架（如 TanStack Router, Next.js App Router 等）的项目，路由结构可以直接通过文件和文件夹的组织来定义。这种模式的优点是直观、易于维护，并能更好地支持代码分割。
+
+在这种模式下，通常会有以下特点：
+
+- **路由文件集中在特定目录**：例如 `src/routes` 或 `src/app`。
+- **文件/文件夹名称映射到 URL 路径**：例如，`src/routes/dashboard/customers.tsx` 可能对应 `/dashboard/customers` 路径。
+- **特殊文件命名约定**：例如 `index.tsx` 可能代表父路径的根路由，`_layout.tsx` 可能定义共享布局，`_error.tsx` 可能定义错误页面。
+
+**示例 (`src/routes` 目录结构):**
+
+```
+src/
+└── routes/
+    ├── __root.tsx          # 根路由布局
+    ├── _auth.tsx           # 认证布局路由
+    ├── _auth/
+    │   ├── sign-in.tsx     # /sign-in
+    │   └── sign-up.tsx     # /sign-up
+    ├── dashboard/
+    │   ├── _layout.tsx     # /dashboard 布局
+    │   ├── index.tsx       # /dashboard
+    │   ├── customers.tsx   # /dashboard/customers
+    │   └── products.tsx    # /dashboard/products
+    └── index.tsx           # /
+```
+
+**与传统 `pages` 和 `routes` 目录的区别：**
+
+在传统模式下，`pages` 目录通常存放页面组件，`routes` 目录存放路由配置。而文件系统路由模式将这两者紧密结合，路由的定义直接内嵌在文件结构中。
+
+**适用场景：**
+
+推荐在新建项目或重构项目时，如果采用支持文件系统路由的现代前端框架，可以考虑使用此模式。它能有效简化路由管理，提高开发效率。
 
 #### app
 

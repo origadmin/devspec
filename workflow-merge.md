@@ -4,6 +4,28 @@
 
 代码合并是将开发分支中的更改集成到主分支（如 `main` 或 `develop`）的过程。本规范旨在确保每次合并都能安全、高效地完成，避免引入错误或破坏现有功能。
 
+## 分支模型 (Branching Model)
+
+本项目推荐采用一种基于 **Git Flow** 的简化分支模型，以确保开发流程的清晰和主分支的稳定。
+
+-   **`main`**: 主分支，代表了最新、最稳定的可发布版本。只接受来自 `develop` 分支和 `hotfix` 分支的合并。
+-   **`develop`**: 开发分支，是所有新功能和修复的集成分支。它是功能分支的父分支，也是合并回 `main` 分支的基础。
+-   **功能分支 (Feature Branches)**:
+    -   命名: `feature/<feature-name>` (例如: `feature/user-auth`)
+    -   用途: 用于开发新的、非紧急的功能。
+    -   来源: 从 `develop` 分支创建。
+    -   合并回: `develop` 分支。
+-   **修复分支 (Fix Branches)**:
+    -   命名: `fix/<issue-name-or-number>` (例如: `fix/login-button-bug`)
+    -   用途: 用于修复在 `develop` 分支上发现的非紧急 bug。
+    -   来源: 从 `develop` 分支创建。
+    -   合并回: `develop` 分支。
+-   **热修复分支 (Hotfix Branches)**:
+    -   命名: `hotfix/<issue-name-or-number>`
+    -   用途: 用于修复线上的紧急 bug。
+    -   来源: 从 `main` 分支创建。
+    -   合并回: `main` 和 `develop` 两个分支。
+
 ## 合并前准备
 
 ### 1. **同步本地代码**
