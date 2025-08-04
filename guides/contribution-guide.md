@@ -1,16 +1,16 @@
-# 贡献指南
+# 贡献指南规范
 
 ## 1. 目的
 
-本指南旨在帮助所有对本项目感兴趣的贡献者，了解如何参与项目开发、提交代码、报告问题以及提出改进建议。我们欢迎并感谢您的任何形式的贡献！
+本规范旨在为项目内部和外部贡献者提供一套清晰、可遵循的指南，确保所有贡献活动能够高效、有序地进行，并符合项目的质量标准和协作原则。我们欢迎并感谢您的任何形式的贡献！
 
 ## 2. 贡献前须知
 
 在开始贡献之前，请确保您已阅读并理解以下内容：
 
-*   **行为准则**：请遵守项目的 [行为准则](link-to-code-of-conduct.md)，确保一个友好、开放和包容的社区环境。
+*   **行为准则**：请遵守项目的 [行为准则规范](../guides/team-collaboration.md#行为准则)。该规范的外部实现请参考 GitHub 仓库的 [CODE_OF_CONDUCT.md](https://github.com/origadmin/.github/blob/main/CODE_OF_CONDUCT.md)。
 *   **开发规范**：请务必遵循项目的 [开发规范总纲](../development-standards.md)，包括编码规范、目录结构、提交规范等，以确保代码风格和质量的一致性。
-*   **Issue 管理规范**：了解如何正确提交 Issue，请参考 [Issue 管理规范](../workflow-issue-management.md)。
+*   **Issue 管理规范**：了解如何正确提交 Issue，请参考 [Issue 管理规范](../workflow-issue-management.md)。Issue 提交的外部实现请参考 GitHub 仓库的 [Issue 模板](https://github.com/origadmin/.github/tree/main/ISSUE_TEMPLATE)。
 
 ## 3. 如何贡献
 
@@ -18,11 +18,11 @@
 
 ### 3.1 报告 Bug
 
-如果您发现任何 Bug，请按照 [Issue 管理规范](../workflow-issue-management.md) 中的指引，提交一个 Bug Issue。请提供详细的复现步骤、环境信息和错误日志。
+如果您发现任何 Bug，请按照 [Issue 管理规范](../workflow-issue-management.md) 中的指引，提交一个 Bug Issue。请提供详细的复现步骤、环境信息和错误日志。建议使用 GitHub 仓库的 [Bug 报告模板](https://github.com/origadmin/.github/blob/main/ISSUE_TEMPLATE/bug_report.md)。
 
 ### 3.2 提交功能请求或改进建议
 
-如果您有新的功能想法或对现有功能的改进建议，请按照 [Issue 管理规范](../workflow-issue-management.md) 中的指引，提交一个 Feature 或 Enhancement Issue。请详细描述您的想法和预期效果。
+如果您有新的功能想法或对现有功能的改进建议，请按照 [Issue 管理规范](../workflow-issue-management.md) 中的指引，提交一个 Feature 或 Enhancement Issue。请详细描述您的想法和预期效果。建议使用 GitHub 仓库的 [功能请求模板](https://github.com/origadmin/.github/blob/main/ISSUE_TEMPLATE/feature_request.md)。
 
 ### 3.3 贡献代码
 
@@ -80,7 +80,7 @@
 
 #### 3.3.3 提交 Pull Request (PR)
 
-1.  **创建 PR**：在 GitHub/GitLab 页面上，从您的功能分支向原始仓库的 `main` 分支创建 Pull Request。
+1.  **创建 PR**：在 GitHub/GitLab 页面上，从您的功能分支向原始仓库的 `main` 分支创建 Pull Request。建议使用 GitHub 仓库的 [Pull Request 模板](https://github.com/origadmin/.github/blob/main/PULL_REQUEST_TEMPLATE.md)。
 2.  **填写 PR 描述**：请提供清晰、详细的 PR 描述，包括：
     *   **解决了什么问题/实现了什么功能**。
     *   **相关的 Issue 编号**（例如：`Closes #123` 或 `Fixes #456`）。
@@ -95,7 +95,7 @@
 
 ## 5. 行为准则
 
-我们致力于维护一个开放、友好和包容的社区。所有参与者都必须遵守 [行为准则](link-to-code-of-conduct.md)。
+我们致力于维护一个开放、友好和包容的社区。所有参与者都必须遵守 [行为准则规范](../guides/team-collaboration.md#行为准则)。
 
 ## 6. 疑问与帮助
 

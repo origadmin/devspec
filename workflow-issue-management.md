@@ -77,11 +77,11 @@
 
 ### 3.3 使用 Issue 模板
 
-为了简化 Issue 提交过程并确保信息完整性，请尽可能使用预定义的 Issue 模板。
+为了简化 Issue 提交过程并确保信息完整性，请尽可能使用预定义的 Issue 模板。这些模板是本规范在 GitHub 平台上的**辅助工具**，旨在帮助您**标准化 Issue 提交**，使其**符合本规范的要求**。
 
-*   **GitHub/GitLab Issue 模板**：
-    *   请访问项目的 `.github/ISSUE_TEMPLATE/` 或 `.gitlab/issue_templates/` 目录，选择合适的模板进行提交。
-    *   **[此处可添加指向具体 Issue 模板文件的链接，例如：](https://github.com/origadmin/.github/tree/main/ISSUE_TEMPLATE)**
+*   **GitHub Issue 模板**：
+    *   请访问项目的 [GitHub Issue 模板目录](https://github.com/origadmin/.github/tree/main/ISSUE_TEMPLATE)，选择合适的模板进行提交。
+    *   **常用模板链接**：
         *   [Bug 报告模板](https://github.com/origadmin/.github/blob/main/ISSUE_TEMPLATE/bug_report.md)
         *   [功能请求模板](https://github.com/origadmin/.github/blob/main/ISSUE_TEMPLATE/feature_request.md)
         *   [通用 Issue 模板](https://github.com/origadmin/.github/blob/main/ISSUE_TEMPLATE/general_issue.md)

@@ -71,4 +71,4 @@
 
 ## 7. 行为准则
 
-请所有团队成员遵守项目的 [行为准则](link-to-code-of-conduct.md)，共同营造一个积极、健康的工作环境。
+请所有团队成员遵守项目的 [行为准则](link-to-code-of-conduct.md)。该规范的外部实现请参考 GitHub 仓库的 [CODE_OF_CONDUCT.md](https://github.com/origadmin/.github/blob/main/CODE_OF_CONDUCT.md)。
