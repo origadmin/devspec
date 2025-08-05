@@ -65,6 +65,39 @@ type Reader interface {
 }
 ```
 
+### 4.5、避免冗余的包名重复
+
+在 Go 语言中，当一个类型、函数或变量的名称与它所在的包名重复时，会造成冗余。这种冗余会降低代码的清晰度和简洁性。
+
+* **符合规范的命名示例：**
+  ```go
+  // 包名: config
+  package config
+
+  type Config struct {} // 外部引用: config.Config
+
+  // 包名: log
+  package log
+
+  func NewLogger() {} // 外部引用: log.NewLogger()
+  ```
+
+* **应避免的冗余命名示例：**
+  ```go
+  // 包名: config
+  package config
+
+  type ConfigConfig struct {} // 外部引用: config.ConfigConfig (冗余)
+
+  // 包名: util
+  package util
+
+  func UtilFunc() {} // 外部引用: util.UtilFunc (冗余)
+  ```
+    * 接口也应遵循此规则，例如在 `parser` 包中，`type Parser interface {}` 是好的，`type ParserParser interface {}` 是冗余的。
+
+**核心原则：** 外部引用时，名称应自然且不重复包名。
+
 ### 5、变量命名
 
 - 和结构体类似，变量名称一般遵循驼峰法，首字母根据访问控制原则大写或者小写，但遇到特有名词时，需要遵循以下规则：
