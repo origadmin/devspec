@@ -6,7 +6,7 @@
 
 适用于业务型项目，采用分层架构（类似 MVC/三层架构）：
 
-```
+```text
 /
 ├── api/            # 对外接口定义（Req/Res 数据结构）
 ├── internal/       # 内部逻辑（Go 的 internal 特性隐藏可见性）
@@ -18,7 +18,7 @@
 │   └── service/    # 业务逻辑实现
 ├── manifest/       # 部署配置（Docker/K8s/Protobuf）
 ├── resource/       # 静态资源
-└── main.go         # 程序入口
+└── main.go # 程序入口
 ```
 
 **特点**：
@@ -31,9 +31,9 @@
 
 推荐用于 Web 服务，结合 `internal` 和 `pkg`：
 
-```
+```text
 mywebapp/
-├── cmd/            # 程序入口（如 cmd/server/main.go）
+├── cmd/            # 程序入口（如 cmd/server/main.go ）
 ├── internal/       # 私有代码
 │   ├── config/     # 配置加载
 │   ├── handler/    # HTTP 路由处理
@@ -56,11 +56,11 @@ mywebapp/
 
 适用于复杂领域模型的项目：
 
-```
+```text
 project/
-├── app/
+├── app/            # 应用层
 │   ├── api/        # 接口层（DTO 转换）
-│   ├── service/    # 应用服务（协调领域逻辑）
+│   └── service/    # 应用服务（协调领域逻辑）
 ├── domain/         # 领域层
 │   ├── model/      # 领域实体
 │   └── repository/ # 仓储接口
@@ -78,7 +78,7 @@ project/
 
 适合小型项目或工具开发：
 
-```
+```text
 project/
 ├── cmd/
 │   └── app/        # 主程序入口
@@ -99,7 +99,7 @@ project/
 
 适用于包含多个服务的项目（如 API + 后台任务）：
 
-```
+```text
 project/
 ├── cmd/
 │   ├── api/        # HTTP 服务入口
@@ -121,10 +121,10 @@ project/
 
 参考 Kubernetes 官方项目布局：
 
-```
+```text
 k8s-project/
 ├── cmd/            # 入口（如 kube-apiserver）
-├── pkg/            # 公共库（如 client-go）
+├── pkg/            # 公共库（如 client-go ）
 ├── staging/        # 临时代码（开发中功能）
 ├── vendor/         # 依赖（已逐步淘汰）
 ├── hack/           # 开发脚本
@@ -137,155 +137,36 @@ k8s-project/
 
 ---
 
-### 总结
+### 总结与选择建议
 
-| **模板类型**   | **适用场景**   | **核心目录**                     | **参考来源** |
-|------------|------------|------------------------------|----------|
-| GoFrame 分层 | 复杂业务系统     | `api/`, `internal/`, `dao/`  |          |
-| 模块化 Web 应用 | 中小型 Web 服务 | `internal/`, `pkg/`, `web/`  |          |
-| DDD 风格     | 高复杂度领域模型   | `domain/`, `infrastructure/` |          |
-| 简洁单服务      | 工具/小型项目    | `cmd/`, `pkg/`               |          |
-| 微服务多应用     | 多服务协同      | `cmd/`, `deployments/`       |          |
+以下表格总结了不同 Go 项目目录结构的特点和适用场景，帮助您根据项目需求做出选择：
 
-**选择建议**：
+| **模板类型**                              | **适用场景**      | **核心特点**                         | **典型目录**                                                 |
+|---------------------------------------|---------------|----------------------------------|----------------------------------------------------------|
+| **GoFrame 推荐结构**                      | 复杂业务系统        | 严格分层（controller → service → dao） | `api/`, `internal/`, `controller/`, `dao/`, `service/`   |
+| **模块化分层结构**                           | 中小型 Web 服务    | 按功能划分，结合 `internal` 和 `pkg`      | `cmd/`, `internal/`, `pkg/`, `web/`                      |
+| **DDD 风格结构**                          | 高复杂度领域模型      | 强调领域模型与业务逻辑解耦                    | `domain/`, `infrastructure/`, `interfaces/`, `usecases/` |
+| **简洁单服务结构**                           | 工具/小型项目       | 轻量级，无复杂分层，快速开发                   | `cmd/`, `pkg/`, `config/`                                |
+| **微服务多应用结构**                          | 包含多个服务的项目     | 通过 `cmd/` 管理多入口，共享 `internal` 代码 | `cmd/`, `internal/`, `deployments/`                      |
+| **Kubernetes 生态结构**                   | 大型基础设施项目      | 强调模块化，适合复杂系统                     | `cmd/`, `pkg/`, `staging/`, `hack/`                      |
+| **`golang-standards/project-layout`** | 中大型通用项目       | 社区标准，模块化清晰，通用性强                  | `cmd/`, `internal/`, `pkg/`, `api/`, `configs/`          |
+| **清洁架构风格**                            | 复杂业务系统        | DDD 分层，高解耦，依赖注入                  | `domain/`, `infrastructure/`, `interfaces/`, `usecases/` |
+| **模块化 Web API 服务**                    | Web API 服务    | 分层明确，集成流行框架                      | `cmd/`, `internal/`, `pkg/`, `configs/`                  |
+| **快速开发脚手架**                           | 快速启动中小型项目     | 一键生成，开箱即用                        | `cmd/`, `config/`, `internal/`, `pkg/`, `deployments/`   |
+| **桌面应用结构**                            | Go + Web 桌面应用 | Go + Web 混合开发，跨平台打包              | `frontend/`, `build/`, `main.go`                         |
+| **可视化生成结构**                           | 可视化项目初始化      | 通过 Web UI 选择技术栈                  | `cmd/`, `internal/`, `pkg/`, `web/`                      |
 
-- **快速开发**：简洁单服务或模块化 Web 结构。
-- **长期维护**：GoFrame 或 DDD 分层。
-- **团队协作**：遵循 `internal/` 限制可见性。
+**如何选择合适的结构：**
 
-更多细节可参考各模板的完整文档（如 [GoFrame](https://goframe.org)
-或 [Kubernetes](https://github.com/kubernetes/kubernetes)）。
+- **项目规模和复杂度**：小型项目可以选择简洁结构，大型复杂项目则倾向于分层或 DDD 风格。
+- **团队协作模式**：考虑团队成员的经验和协作习惯。
+- **项目类型**：Web 服务、CLI 工具、库、微服务等不同类型有不同的最佳实践。
+- **未来可扩展性**：评估当前选择是否能满足未来的扩展需求。
 
-以下是几个值得参考的 Go 项目目录结构模板，涵盖不同规模和类型的项目需求：
+**重要提示：**
 
----
-
-### 1. **`golang-standards/project-layout`**（社区推荐）
-
-```
-.
-├── cmd/            # 主程序入口（每个子目录对应一个可执行文件）
-├── internal/       # 私有代码（仅本项目可用）
-├── pkg/            # 可复用的公共库
-├── api/            # API 定义（OpenAPI/gRPC）
-├── web/            # 静态资源与前端文件
-├── configs/        # 配置文件
-├── deployments/    # 容器化/集群部署配置
-├── scripts/        # 运维脚本
-└── test/           # 测试代码
-```
-
-**特点**：
-
-- 适用于中大型项目，强调模块化与封装性。
-- 被多个知名开源项目采用（如 Kubernetes）。
-
----
-
-### 2. **`go_clean_architecture`（清洁架构风格）**
-
-```
-.
-├── domain/         # 领域模型与接口定义
-├── infrastructure/ # 基础设施（数据库/缓存实现）
-├── interfaces/     # 外部交互层（HTTP/RPC）
-├── usecases/       # 业务逻辑层
-└── main.go         # 入口文件
-```
-
-**特点**：
-
-- 遵循 DDD（领域驱动设计），适合复杂业务系统。
-- 依赖注入（使用 `uber-go/fx`）提高解耦性。
-
----
-
-### 3. **`fastgo`（模块化分层结构）**
-
-```
-.
-├── cmd/            # 入口（如 `fg-apiserver/main.go`）
-├── internal/       # 业务逻辑分层（biz/handler/model/store）
-├── pkg/            # 公共工具（日志/中间件）
-├── configs/        # 配置文件
-└── migrations/     # 数据库迁移脚本
-```
-
-**特点**：
-
-- 适合 Web API 服务，分层明确（类似 MVC）。
-- 集成 GORM、Gin 等常用框架。
-
----
-
-### 4. **`nunu`（脚手架生成的结构）**
-
-```
-.
-├── cmd/            # 入口（如 `main.go`）
-├── config/         # 配置加载（Viper）
-├── internal/       # 业务逻辑（service/repository）
-├── pkg/            # 公共库（数据库/日志封装）
-└── deployments/    # Docker/K8s 配置
-```
-
-**特点**：
-
-- 通过命令行工具快速生成，集成 Gin、GORM、Redis 等。
-- 适合快速启动中小型项目。
-
----
-
-### 5. **`wails`（桌面应用结构）**
-
-```
-.
-├── frontend/       # 前端代码（React/Vue/Svelte）
-├── build/          # 构建配置
-├── go.mod          # Go 依赖管理
-└── main.go         # 后端入口
-```
-
-**特点**：
-
-- 专为 Go + Web 技术的桌面应用设计（类似 Electron）。
-- 支持跨平台打包为单一二进制文件。
-
----
-
-### 6. **`Go-Blueprint`（可视化生成的结构）**
-
-```
-.
-├── cmd/            # 入口（支持多框架：Gin/Chi/Fiber）
-├── internal/       # 业务逻辑
-├── pkg/            # 公共库
-├── web/            # 前端资源
-└── docker-compose.yml  # 容器化配置
-```
-
-**特点**：
-
-- 通过 Web UI 选择技术栈（如数据库、Web 框架）自动生成。
-- 适合团队统一项目初始化标准。
-
----
-
-### 总结
-
-| **项目**                  | **适用场景**   | **核心特点**      |  
-|-------------------------|------------|---------------|  
-| `project-layout`        | 中大型通用项目    | 社区标准，模块化清晰    |  
-| `go_clean_architecture` | 复杂领域模型     | DDD 分层，高解耦    |  
-| `fastgo`                | Web API 服务 | 分层明确，集成流行框架   |  
-| `nunu`                  | 快速开发脚手架    | 一键生成，开箱即用     |  
-| `wails`                 | 桌面应用       | Go + Web 混合开发 |  
-| `Go-Blueprint`          | 可视化初始化     | 支持多技术栈选择      |  
-
-**选择建议**：
-
-- **团队协作**：优先 `project-layout` 或 `Go-Blueprint`。
-- **业务系统**：`go_clean_architecture` 或 `fastgo`。
-- **快速原型**：`nunu` 或 `wails`（桌面应用）。
+- **没有“银弹”**：没有一种目录结构适用于所有项目。最重要的是选择一种适合您项目和团队的结构，并保持一致性。
+- **`internal` 目录**：Go 语言的 `internal` 目录是强制性的私有代码约定，可以有效限制包的可见性，是 Go 项目中非常推荐的实践。
+- **Go Modules**：所有现代 Go 项目都应使用 Go Modules 进行依赖管理。
 
 更多细节可参考各项目的 GitHub 仓库或文档。
