@@ -202,10 +202,9 @@ Git 钩子脚本。此目录用于存放自定义的 Git 钩子，例如 `pre-co
 ## 参考
 
 - [golang-standards/project-layout](https://github.com/golang-standards/project-layout)
-- [Go CodeReviewComments](https://github.com/golang/go/wiki/CodeReviewComments)
+- [Go CodeReviewComments](https://go.dev/wiki/CodeReviewComments)
 - [Effective Go](https://golang.org/doc/effective_go.html)
 - [Commentary in Go](https://golang.org/doc/effective_go#commentary)
 - [I’ll take pkg over internal](https://travisjeffery.com/blog/2019/11/i-will-take-pkg-over-internal/)
 - [Package Oriented Design](https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html)
-- [GopherCon 2018: Kat Zien - How Do You Structure Your Go Apps](https://www.youtube.com/watch?v=oL6JBUk6tjF)
-- [Golab 2018 Massimiliano Pippi - Project layout patterns in Go](https://www.youtube.com/watch?v=oL6JBUk6tjF)
+
