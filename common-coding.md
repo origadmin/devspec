@@ -45,10 +45,10 @@ utils.py: 该模块包含了项目共用的一些工具函数。
 def create_new_user(name: str) -> 'User':
     """
     创建一个新的用户对象。
-    
+
     参数：
         name: 用户名
-    
+
     返回值：
         User 对象
     """

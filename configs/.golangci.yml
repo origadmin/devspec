@@ -1,0 +1,69 @@
+version: "2"
+
+run:
+  timeout: 5m
+  # Enable Go module support. golangci-lint will automatically find go.mod files.
+  # For Go workspaces, it will find go.work files and process all listed modules.
+  modules-download-mode: mod
+  # Specify the Go version, consistent with the Go version used by the project.
+  # go: '1.23' # This line is removed as it's project-specific
+
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - unused
+    - revive
+    - goconst
+    - ineffassign
+    - bodyclose
+    - rowserrcheck
+    - sqlclosecheck
+    - nilerr
+    - prealloc
+    - gosec
+  settings:
+    goconst:
+      min-len: 2
+      min-occurrences: 2
+    govet:
+    # check-shadowing: true # Enable shadowing check, finds variable shadowing issues.
+    # Note: If govet reports errors, this might need to be removed as it might not be supported in some versions.
+    gocyclo:
+      min-complexity: 15
+
+issues:
+  # Exclude specific rules for issues.
+  # exclude-rules: # This section is removed as it's project-specific
+  #   - path: _test\.go
+  #     linters:
+  #       - funlen
+  #   - path: api/gen/
+  #     linters:
+  #       - revive
+  #       - staticcheck
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  new: true
+  uniq-by-line: false
+  fix: true
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+    # Define all local module paths for monorepo.
+    # This ensures goimports correctly groups imports in any submodule.
+    # local-prefixes: # This section is removed as it's project-specific
+    #   - github.com/xxxx/yyyy
+
+output:
+  formats:
+    text:
+      print-linter-name: true
+      print-issued-lines: true
+      colors: true

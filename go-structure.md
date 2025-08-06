@@ -1,42 +1,42 @@
 # 目录结构
 
-**注意：** 本文档描述的是一个标准的、独立的服务型应用（如 `projects/backend`）的推荐目录结构。对于框架或库类型的项目（如 `origadmin/framework` 本身），其目录结构可能遵循不同的、更适合其库特性的组织方式（例如，将核心代码平铺在根目录或特定的模块目录下）。
+**注意：** 本文档描述的是一个标准的、独立的服务型应用推荐的目录结构。对于框架或库类型的项目，其目录结构可能遵循不同的、更适合其库特性的组织方式（例如，将核心代码平铺在根目录或特定的模块目录下）。
 
 项目的目录结构通常也是门面，内行人通过目录结构基本就能看出开发者是否有经验。
 
 Go 官网并没有给出一个目录结构的标准模板，但是 golang-standards 倒是给出了一个，目录结构如下：
 
 ```
-├── api
-├── assets
-├── build
-│   ├── ci
-│   └── package
-├── cmd
-│   └── _your_app_
-├── configs
-├── deployments
-├── docs
-├── examples
-├── githooks
-├── init
-├── internal
-│   ├── app
-│   │   └── _your_app_
-│   └── pkg
-│       └── _your_private_lib_
-├── pkg
-│   └── _your_public_lib_
-├── scripts
-├── test
-├── third_party
-├── tools
-├── vendor
-├── web
-│   ├── app
-│   ├── static
-│   └── template
-├── website
+├── api             # 外部 API 定义 (e.g., OpenAPI, Protobuf)
+├── assets          # 静态资源 (e.g., 图片, CSS, JS)
+├── build           # 打包和持续集成相关文件
+│   ├── ci          # 持续集成配置和脚本
+│   └── package     # 打包配置和脚本 (e.g., Docker, deb, rpm)
+├── cmd             # 主应用程序入口 (可执行文件)
+│   └── <app_name>  # 每个子目录对应一个可执行应用
+├── configs         # 配置文件模板或默认配置
+├── deployments     # 部署配置和模板 (e.g., Kubernetes, Helm, Terraform)
+├── docs            # 项目文档 (设计, 用户手册等)
+├── examples        # 应用程序或公共库的示例程序
+├── githooks        # Git 钩子脚本
+├── init            # 系统初始化和进程管理配置 (e.g., systemd, supervisord)
+├── internal        # 私有应用程序代码库 (不希望被外部导入)
+│   ├── app         # 应用程序特定的内部代码
+│   │   └── <app_name> # 应用程序内部逻辑
+│   └── pkg         # 应用程序共享的内部库
+│       └── <private_lib> # 私有库代码
+├── pkg             # 外部应用程序可以使用的公共库代码
+│   └── <public_lib> # 公共库代码
+├── scripts         # 各种构建, 安装, 分析等操作的脚本
+├── test            # 外部测试应用程序和测试数据
+├── third_party     # 外部辅助工具, fork 的代码和其他第三方工具
+├── tools           # 此项目的支持工具 (可导入 internal/pkg 代码)
+├── vendor          # 应用程序的依赖关系 (Go Modules 缓存)
+├── web             # Web 应用程序特定组件
+│   ├── app         # Web 应用逻辑
+│   ├── static      # 静态 Web 资源
+│   └── template    # 服务器端模板
+├── website         # 项目网站数据
 ├── .gitignore
 ├── LICENSE.md
 ├── Makefile

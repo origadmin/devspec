@@ -125,7 +125,7 @@ const AppVer = "1.0"
 
 ```
 type Scheme string
- 
+
 const (
     HTTP  Scheme = "http"
     HTTPS Scheme = "https"
@@ -294,13 +294,13 @@ Go语言中是不需要类似于Java需要冒号结尾，默认一行就是一�
 ```
 // 正确的方式
 if a > 0 {
- 
-} 
- 
+
+}
+
 // 错误的方式
 if a>0  // a ，0 和 > 之间应该空格
 {       // 左大括号不可以换行，会报语法错误
- 
+
 }
 ```
 
@@ -312,14 +312,14 @@ if a>0  // a ，0 和 > 之间应该空格
 import (
     "encoding/json"
     "strings"
- 
-    "github.com/origadmin/framework/runtime/config"
-    "github.com/origadmin/toolkits/errors"
- 
-    "github.com/astaxie/beego"
+
+"github.com/your-org/your-project/your-module/config"
+"github.com/your-org/your-project/your-module/errors"
+
+"github.com/astaxie/beego"
     "github.com/go-sql-driver/mysql"
 )
-``` 
+```
 
 **禁止在 `import` 语句中使用相对路径**：
 
@@ -342,7 +342,7 @@ import "../net"
 
 ```go
 // 在 go.mod 中
-replace github.com/origadmin/runtime => ./runtime
+replace github.com/your-org/your-project/your-module = >./your-module
 ```
 
 但在本项目中，我们**优先并推荐使用 `go.work`**。
@@ -362,7 +362,7 @@ if err != nil {
 } else {
     // normal code
 }
- 
+
 // 正确写法
 if err != nil {
     // error handling
@@ -586,35 +586,53 @@ scrape_configs:
 
 ## 四、常用工具
 
-上面提到了很过规范， go 语言本身在代码规范性这方面也做了很多努力，很多限制都是强制语法要求，例如左大括号不换行，引用的包或者定义的变量不使用会报错，此外
-go 还是提供了很多好用的工具帮助我们进行代码的规范，
+为了确保代码质量和风格统一，我们推荐使用 `golangci-lint` 作为 Go 项目的统一代码检查工具。
 
-gofmt 大部分的格式问题可以通过gofmt解决， gofmt 自动格式化代码，保证所有的 go 代码与官方推荐的格式保持一致，于是所有格式有关问题，都以
-gofmt 的结果为准。
+`golangci-lint` 是一个快速的 Go linter 运行器，它集成了多种 linter（包括 `gofmt`, `goimports`, `go vet`, `revive`
+等），并提供了统一的配置和运行方式。通过使用 `golangci-lint`，我们可以：
 
-goimport 我们强烈建议使用 goimport ，该工具在 gofmt 的基础上增加了自动删除和引入包.
+- **统一代码风格**：强制执行 `gofmt` 和 `goimports` 等格式化工具的规则。
+- **发现潜在问题**：利用 `go vet`, `staticcheck`, `errcheck` 等工具发现代码中的错误、性能问题和可疑构造。
+- **提高开发效率**：通过统一的配置和快速的运行速度，帮助开发者在早期发现并修复问题。
+- **简化 CI/CD 流程**：在持续集成/持续部署流程中，只需运行一个命令即可完成所有代码检查。
 
-```
-go get golang.org/x/tools/cmd/goimports
-```
+### 使用 `golangci-lint`
 
-go vet vet工具可以帮我们静态分析我们的源码存在的各种问题，例如多余的代码，提前return的逻辑，struct的tag是否符合标准等。
+请确保您的开发环境中已安装 `golangci-lint`。如果未安装，可以通过以下命令安装：
 
-```
-go get golang.org/x/tools/cmd/vet
-```
-
-使用如下：
-
-```
-go vet .
+```sh
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
 ```
 
-revive 是一款功能强大格式检查工具类似golint。
+在项目根目录下，`golangci-lint` 会自动查找 `.golangci.yml` 配置文件。您可以通过以下命令运行代码检查：
 
-```
-go install github.com/mgechev/revive@latest
-go install github.com/mgechev/revive@master
+```sh
+golangci-lint run ./...
 ```
 
-使用配置可参考官方文档：https://github.com/mgechev/revive#text-editors
+这将对项目中的所有 Go 文件进行全面的代码检查。具体的检查规则和配置请参考项目根目录下的 `.golangci.yml` 文件。
+
+### 集中式代码检查 (针对整个 Monorepo)
+
+在 Monorepo 环境下，您可以在项目根目录运行 `golangci-lint`，并指定所有子模块的路径，以确保对整个代码库进行统一检查：
+
+```sh
+golangci-lint run \
+  ./your-module1/... \
+  ./your-module2/... \
+  ./your-module3/... \
+  .
+```
+
+### 分布式代码检查 (针对特定模块)
+
+如果您只希望对某个特定的 Go 模块进行代码检查，可以在该模块的根目录（或从项目根目录指定其相对路径）运行 `golangci-lint`：
+
+```sh
+# 在项目根目录执行，检查 your-module 模块
+golangci-lint run ./your-module/...
+
+# 或者，进入 your-module 模块目录后执行
+cd your-module
+golangci-lint run ./...
+```
