@@ -207,4 +207,3 @@ Git 钩子脚本。此目录用于存放自定义的 Git 钩子，例如 `pre-co
 - [Commentary in Go](https://golang.org/doc/effective_go#commentary)
 - [I’ll take pkg over internal](https://travisjeffery.com/blog/2019/11/i-will-take-pkg-over-internal/)
 - [Package Oriented Design](https://www.ardanlabs.com/blog/2017/02/package-oriented-design.html)
-
